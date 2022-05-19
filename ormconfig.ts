@@ -1,13 +1,22 @@
 import {ConnectionOptions} from "typeorm";
 import {join} from "path";
+import {config} from 'dotenv';
+config();
+
+const port: number = Number(process.env.PORT);
+const databasePort: number = Number(process.env.DB_PORT);
+const databaseHost: string = process.env.DB_HOST;
+const username: string = process.env.DB_USERNAME;
+const password: string = process.env.DB_PASSWORD;
+const databaseName: string = process.env.DB_NAME;
 
 export const ormconfig: ConnectionOptions = {
    "type": "postgres",
-   "host": "localhost",
-   "port": 5432,
-   "username": "admin",
-   "password": "admin",
-   "database": "loan",
+   "host": databaseHost,
+   "port": databasePort,
+   "username": username,
+   "password": password,
+   "database": databaseName,
    "synchronize": true,
    "logging": false,
    "entities": [
@@ -25,3 +34,5 @@ export const ormconfig: ConnectionOptions = {
       "subscribersDir": "src/subscriber"
    }
 }
+
+export default port; 
